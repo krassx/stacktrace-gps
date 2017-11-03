@@ -322,8 +322,8 @@
                     var isDataUrl = sourceMappingURL.substr(0, 5) === 'data:';
                     var defaultSourceRoot = fileName.substring(0, fileName.lastIndexOf('/') + 1);
 
-                    if (sourceMappingURL[0] !== '/' && !isDataUrl && !(/^https?:\/\/|^\/\//i).test(sourceMappingURL)) {
-                        sourceMappingURL = defaultSourceRoot + sourceMappingURL;
+                    if (!isDataUrl && !(/^https?:\/\/|^\/\//i).test(sourceMappingURL)) {
+                        sourceMappingURL = defaultSourceRoot + (sourceMappingURL[0] === '/' ? sourceMappingURL.substring(1) : sourceMappingURL);
                     }
 
                     return this._getSourceMapConsumer(sourceMappingURL, defaultSourceRoot)
